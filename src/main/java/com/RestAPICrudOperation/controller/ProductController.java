@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,13 @@ public class ProductController {
 		
 		
 		return new ResponseEntity<List<Product>>(productService.getall(),HttpStatus.OK);
+	}
+	
+	@PutMapping("/updateprice/{name}/{price}")
+	public ResponseEntity<String> updateprice(@PathVariable String name,@PathVariable double price){
+		
+		
+		return new  ResponseEntity<String>(productService.updateprice(name, price),HttpStatus.UPGRADE_REQUIRED);
 	}
 	
 }

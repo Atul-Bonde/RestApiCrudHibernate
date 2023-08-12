@@ -77,4 +77,25 @@ public class ProductServiceImpl implements ProductService {
 		return getall;
 	}
 
+	@Override
+	public String updateprice(String name, double price) {
+		
+		logger.info("Price Update Method Starting Point");
+		
+		Integer updateprice = productRepository.updateprice(name, price);
+		
+		logger.info("Price Update Mathod Ending Point");
+		
+		if(updateprice>=1) {
+			
+			return "Product Updated Successfully";
+			
+			
+		}else {
+			
+		return "Product not Updated";
+		
+		}
+	}
+
 }
