@@ -68,4 +68,28 @@ public class ProductRepository {
 		return loadAll;
 	}
 
+	public Integer updateprice(String name,double price) {
+		
+		Session session = sessionFactory.openSession();
+		
+		session.beginTransaction();
+		
+		String q = Query.updateprice;
+		
+	 org.hibernate.query.Query query = session.createQuery(q);
+	 
+	 query.setParameter("Y",name );
+	 query.setParameter("X", price);
+	 
+	 int executeUpdate = query.executeUpdate();
+	 
+	 session.getTransaction().commit();
+	 
+	 session.close();
+	  
+	 return executeUpdate;
+	 
+		
+		
+	}
 }

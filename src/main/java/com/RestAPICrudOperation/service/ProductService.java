@@ -14,5 +14,7 @@ public interface ProductService {
 	public Product getbyname(String name);
 	
 	public List<Product> getall();
+	
+	public String updateprice(String name,double price);
 
 }
