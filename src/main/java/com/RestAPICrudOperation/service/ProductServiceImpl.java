@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.RestAPICrudOperation.exception.ProductNotFound;
 import com.RestAPICrudOperation.model.Product;
 import com.RestAPICrudOperation.repository.ProductRepository;
 
@@ -17,6 +18,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	
 
 	@Override
 	public String save(Product p) {
@@ -45,11 +48,21 @@ public class ProductServiceImpl implements ProductService {
 
 		logger.info("Get Product By Id Starting Point");
 		
-		Product findyid = productRepository.findyid(id);
+		 Product findyid = productRepository.findyid(id);
+		 
+		 logger.info("Get Product By Id Ending Point ");
+		 
+		 if(findyid!=null) {
+			 
+			 return findyid;
+		 }
 		
-		logger.info("Get Product By Id Ending Point ");
-
-		return findyid;
+		 else{
+			
+			 throw new ProductNotFound("No Such a Product Found Exception");
+	 	 
+		 }
+	
 
 	}
 
@@ -59,11 +72,20 @@ public class ProductServiceImpl implements ProductService {
 		logger.info("Get Product By Name Starting Point");
 
 		Product findbyname = productRepository.findbyname(name);
-
+        
 		logger.info("Get Product By Name Ending Point ");
 		
+		if(findbyname!=null) {
+		
 		return findbyname;
+		}
+		
+		else {
+			
+			throw new ProductNotFound("No Such a Product Found");
+		}
 	}
+	
 
 	@Override
 	public List<Product> getall() {
